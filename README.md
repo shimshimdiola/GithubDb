@@ -49,7 +49,7 @@ if (!empty($_POST['username']) && !empty($_POST['email'])) {
 
 5.Open the HTML file in your browser:
 
-📂 Project Structure
+**📂 Project Structure**
 ```bash
 /GithubDb
  └── /api
