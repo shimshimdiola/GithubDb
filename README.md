@@ -24,5 +24,32 @@ It sends data (username and email) to a PHP backend (`save.php`) via `POST` with
 
 1. Clone or download the project.
 2. Place the files inside your local server directory (e.g., `htdocs` for **XAMPP**).
-3. Make sure you have a backend file at:
+3. Make sure you have a backend file at:/GithubDb/api/save.php
+
+Example `save.php`:
+
+```php
+<?php
+header("Content-Type: application/json");
+
+if (!empty($_POST['username']) && !empty($_POST['email'])) {
+    echo json_encode([
+        "status" => "success",
+        "message" => "Data received: " . $_POST['username'] . " (" . $_POST['email'] . ")"
+    ]);
+} else {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Missing username or email."
+    ]);
+}
+?>
+```
+4.Start your local server (XAMPP/WAMP).
+5.Open the HTML file in your browser:
+📂 Project Structure
+/GithubDb
+ └── /api
+     └── save.php
+index.html
 
