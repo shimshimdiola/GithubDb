@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX Input Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h2>AJAX Form Example</h2>
+
+  <form id="myForm">
+    <input type="text" id="username" name="username" placeholder="Enter username" required>
+    <input type="email" id="email" name="email" placeholder="Enter email" required>
+    <button type="submit">Send</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    $(document).ready(function () {
+  $("#myForm").on("submit", function (e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "http://localhost/GithubDb/api/save.php",
+      method: "POST",
+      dataType: "json", // expect JSON
+      data: {
+        username: $("#username").val(),
+        email: $("#email").val()
+      },
+      success: function (response) {
+        if (response.status === "success") {
+          $("#result").html("<p style='color:green;'>✅ " + response.message + "</p>");
+        } else {
+          $("#result").html("<p style='color:orange;'>⚠️ " + response.message + "</p>");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.log("XHR:", xhr.responseText);
+        $("#result").html("<p style='color:red;'>❌ Server error: " + error + "</p>");
+      }
+    });
+  });
+});
+
+  </script>
+</body>
+</html>
